@@ -1,0 +1,43 @@
+#Parameters are defined in Table 1, exept from C_CO2 and rho_CO2
+A = 9        #Area of reservoir [km^2]
+h = 800        #The average thickness of the reservoir [m]
+rho_r = 2250    #Rock density [kg/m^3]
+rho_CO2 = 334.17    #Fluid density [kg/m^3]
+C_r = 0.91      #Rock specific heat at reservoir conditions [kJ/kg-°C]
+C_CO2 = 1.546      #Fluid specific heat at reservoir conditions [kJ/kg-°C]
+phi = 0.2      #Porosity [%]
+T_r = 175      #The average temperature of the reservoir [°C]
+T_a = 70      #Final or abandon temperature [°C]
+S_w = 0.95      #Water saturation [%]
+
+#Parameters are defined in Table 2
+RF = 0.175       #Recovery factor [%]
+C_e = 0.175      #Conversion efficiency [%]
+PF = 0.95       #Plant net capacity factor or plant factor [%]
+t = 25        #Lifespan (economic life) [years]
+
+SPY = 365 * 24 * 60 * 60 #seconds per year
+
+def total_thermal_energy(A, h, rho_r, rho_CO2, C_r, C_CO2, phi, T_r, T_a):
+    Q_r = A * h * (rho_r * C_r * (1 - phi) * (T_r - T_a))
+    Q_w = A * h * (S_w * rho_CO2 * C_CO2 * phi * (T_r - T_a))
+    Q_T = Q_r + Q_w
+    return Q_T
+
+def geothermal_power(Q_T, RF, C_e, PF, t):
+    P = (Q_T * RF * C_e) / (PF * t)
+    return P
+
+def thermal_power_output(Q_T, t, SPY):
+    P_T = Q_T /( t * SPY)
+    return P_T
+
+Q_T = total_thermal_energy(A, h, rho_r, rho_CO2, C_r, C_CO2, phi, T_r, T_a)
+print(f"The total amount of thermal energy (Q_T) is {Q_T} kJ")
+
+P = geothermal_power(Q_T, RF, C_e, PF, t)
+print(f"The size of the power plant (P) is {P} We")
+
+P_T = thermal_power_output(Q_T, t, SPY)
+print(f"The thermal power output for CO_2 (P_T) is {P_T} kWt")
+
