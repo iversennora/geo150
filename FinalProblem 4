@@ -39,5 +39,5 @@ P = geothermal_power(Q_T, RF, C_e, PF, t)
 print(f"The size of the power plant (P) is {P} We")
 
 P_T = thermal_power_output(Q_T, t, SPY)
-print(f"The thermal power output for CO_2 (P_T) is {P_T} kWt")
+print(f"The thermal power output for CO_2 (P_T) is {P_T} kW")
 
