@@ -14,11 +14,11 @@ Pm = 0.7 * 0.0227e6 * 2500     # Fracture initiation pressure of the caprock [Pa
 Pi= 25e6                    # Initial pressure in the reservoir [Pa]
 
 def storage_capacity_open_aquifer(V_trap, phi, N, G, rho_CO2, E, Swirr):
-    M_CO2_O = (V_trap * phi * (N/G) * rho_CO2 * E * (1 - Swirr))/1000000000     # Conversion factor from kg to Mt
+    M_CO2_O = (V_trap * phi * (N/G) * rho_CO2 * E * (1 - Swirr))/1000000000
     return M_CO2_O
 
 def storage_capacity_closed_aquifer(V_trap, phi, N, G, rho_CO2, Cw, Cr, Pm, Pi):
-    M_CO2 = (V_trap * phi * (N/G) * rho_CO2 * (Cw + Cr) * (Pm - Pi))/1000000000    # Conversion factor from kg to Mt
+    M_CO2 = (V_trap * phi * (N/G) * rho_CO2 * (Cw + Cr) * (Pm - Pi))/1000000000
     return M_CO2
 
 M_CO2_O = storage_capacity_open_aquifer(V_trap, phi, N, G, rho_CO2, E, Swirr)
